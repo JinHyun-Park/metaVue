@@ -22,4 +22,7 @@ VS code 확장 설치목록
 Vue.js를 <script> 내 URL로 입력할 경우는 devtools 사용을 위해 chrome://extensions 로 이동해서 Vue.js devtools를 찾아 파일 URL에 대한 액세스 허용 선ㅌ개
 
 Vue CLI 설치 : 폴더 구조 잡아주는 역할
+npm install -g vue-cli
 npm install -g yarn @vue/cli
+
+vue init webpack my-project   : my-project 라는 폴더 구조 생성
