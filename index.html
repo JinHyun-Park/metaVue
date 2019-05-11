@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>hello vue.js</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="simple">
+        <h2>{{message}}</h2>
+    </div>
+
+    <script type="text/javascript">
+        var model = {
+            message: '첫 번째 vue.js 입1니다'
+        };
+
+        var simple = new Vue({
+            el: '#simple',
+            data: model
+        })
+    </script>
+
+    <div id="simple2">
+        <input type="text" v-model="name" placeholder="이름을 입력" />
+        <br/> 입력된 이름 :
+        <h2 v-html="name"></h2>
+    </div>
+    <script type="text/javascript">
+        var toway = new Vue({
+            el: '#simple2',
+            data: {
+                name: ''
+            }
+        })
+    </script>
+
+    <div id="simple3">
+        <div>좋아하는 과일 : </div>
+        <input type="checkbox" value="1" v-model="fruits">사과,
+        <input type="checkbox" value="2" v-model="fruits">키위,
+        <input type="checkbox" value="3" v-model="fruits">포도,
+        <input type="checkbox" value="4" v-model="fruits">수박,
+        <input type="checkbox" value="5" v-model="fruits">참외
+    </div>
+    <br/>
+    <div id="simple4">
+        선택한 과일들 : <span v-html="fruits"></span>
+    </div>
+    <script type="text/javascript">
+        var model = {
+            fruits: []
+        };
+
+        var simple1 = new Vue({
+            el: '#simple3',
+            data: model
+        });
+
+        var simple2 = new Vue({
+            el: '#simple4',
+            data: model
+        });
+    </script>
+
+    <div id="account">
+        잔고 : <input type="text" v-model="balance" />
+        <br/> 회원님의 등급 :
+        <span v-if="balance >=1000000">Gold</span>
+        <span v-else-if="balance >= 500000">Silver</span>
+        <span v-else>Basic</span>
+        <!-- <img v-show="amount < 0" src="images/error.png" title="마이너스는 허용되지 않음" style="width:15px; height: 15px; vertical-align: middle" /> -->
+    </div>
+    <script type="text/javascript">
+        var simple1 = new Vue({
+            el: '#account',
+            data: {
+                balance: 0
+            }
+        })
+    </script>
+</body>
+
+</html>

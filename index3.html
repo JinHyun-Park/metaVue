@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>02-08</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- <div id="example">
+        <span v-once>{{message}}</span>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#example',
+            data: {
+                message: "hello world"
+            }
+        });
+    </script>
+
+    <div id="example2">
+        <input type="text" v-model="num" /><br/> 1부터 입력된 수 합 : <span>{{sum}}</span>
+    </div>
+    <script type="text/javascript">
+        var sum = new Vue({
+            el: '#example2',
+            data: {
+                num: 0
+            },
+            computed: {
+                sum: function() {
+                    var n = Number(this.num);
+                    if (Number.isNaN(n) || n < 1) return 0;
+                    return ((1 + n) * n) / 2;
+                }
+            },
+        })
+    </script> -->
+
+    <div id="example">
+        <p>
+            국가명 : <input type="text" v-model="countryname" placeholder="country" @input="nameChanged" />
+        </p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>국가명</th>
+                    <th>수도</th>
+                    <th>지역</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="c in filtered">
+                    <td>{{c.no}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.capital}}</td>
+                    <td>{{c.region}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var model = {
+            countryname: "",
+            countries: [{
+                no: 1,
+                name: "미국",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 2,
+                name: "프랑스",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 3,
+                name: "영국",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 4,
+                name: "중국",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 5,
+                name: "태국",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 6,
+                name: "모로코",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 7,
+                name: "라오스",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 8,
+                name: "베트남",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 9,
+                name: "피지",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 10,
+                name: "자메이카",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 11,
+                name: "나미비아",
+                capital: "워싱턴DC",
+                region: "america"
+            }, {
+                no: 12,
+                name: "동티모르",
+                capital: "워싱턴DC",
+                region: "america"
+            }]
+        }
+
+        var clist = new Vue({
+            el: '#example',
+            data: model,
+            computed: {
+                filtered: function() {
+                    var cname = this.countryname.trim();
+                    return this.countries.filter(function(item, index) {
+                        if (item.name.indexOf(cname) > -1) {
+                            return true;
+                        }
+                    });
+                }
+            },
+            method: {
+                nameChanged: function(e) {
+                    this.countryname = e.target.value;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
