@@ -1,0 +1,30 @@
+https://handcoding.tistory.com/196
+개발 환경 구축
+
+http://vuejs.kr/jekyll/update/2017/03/13/vuejs-component-style-guide/
+vue js 한국 사용자 
+
+https://beomy.tistory.com/40
+vue 시작, 다양한 설명과 구조 
+
+VS Code + Git 연동
+https://evols-atirev.tistory.com/14
+
+VS code 확장 설치목록
+1. view-in-browser : html 파일을 기본 브라우저로 볼 수 있도록 함
+2. vetur 코드에 대한 문법 강조, 코드 자동완성, 디버깅 린팅 기능들 제공
+3. HTML Snippets : HTML 태그 조각을 빠르게 작성할 수 있도록 도와줌
+4. JS-CSS-HTML Formatters : JS, CSS, HTML의 코드 자동완성 기능을 제공, 에디터 창에서 Cntl+Space 눌러 사용
+5. Vue 2 Snippets : Vue.js 2.0 의 코드 조각 지원과 문법 강조 기능 제공
+6. Vue-beautify : Vue.js 코드에 대한 정리, 배치 기능 제공
+7. ESLint : 자바스크립트 코드 스타일, 문법 체크 기능을 제공
+
+크롬 브라우저 Vue JS devtools 설치
+크롬 웹스토어 검색 > Vue.js 검색 > Vue.js devtools 설치
+Vue.js를 <script> 내 URL로 입력할 경우는 devtools 사용을 위해 chrome://extensions 로 이동해서 Vue.js devtools를 찾아 파일 URL에 대한 액세스 허용 선ㅌ개
+
+Vue CLI 설치 : 폴더 구조 잡아주는 역할
+npm install -g vue-cli
+npm install -g yarn @vue/cli
+
+vue init webpack my-project   : my-project 라는 폴더 구조 생성
