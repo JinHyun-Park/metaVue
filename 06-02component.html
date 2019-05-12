@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>06-02</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- <script type="text/javascript">
+        Vue.component('hello-component', {
+            template: '<div>hello world111</div>'
+        })
+    </script> -->
+
+    <template id="helloTemplate">
+        <div>hello World!!</div>
+    </template>
+    <!-- <script type="text/x-template" id="helloTemplate">
+        <div>So Easy!!!</div>
+    </script> -->
+
+    <script type="text/javascript">
+        Vue.component('hello-component', {
+            template: '#helloTemplate'
+        })
+    </script>
+
+    <div id="app">
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+    </div>
+    <script type="text/javascript">
+        var v = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+</html>

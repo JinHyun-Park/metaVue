@@ -31,3 +31,6 @@ npm install -g vue-cli
 npm install -g yarn @vue/cli
 
 vue init webpack my-project   : my-project 라는 폴더 구조 생성
+
+라이브서버 설치 : 코드를 변경하고 재실행할 때 매번 새로고침을 누르지 않아도 됨.
+npm install -g liver-server
