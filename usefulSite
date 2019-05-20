@@ -36,3 +36,14 @@ vue init webpack my-project   : my-project 라는 폴더 구조 생성
 npm install -g liver-server
 Babel 관련 라이브러리 설치
 npm install -g babel-cli yarn
+
+ajax 용 라이브러리인 axios 다운
+yarn add axios 또는 npm install --save axios
+
+뷰 페이징 처리 설치 vuejs-paginate
+yarn add vuejs-paginate bootstrap@3.3.x 또는 npm install --save vuejs-paginate bootstrap@3.3.x
+
+IE에서는 Promise 객체 지원안하기 때문에 Promise 사용하도록 설치
+yarn add es6-promise 또는 npm install --save es6-promise
+
+npm install 다운로드하지 않은 라이브러리 발생 방지
