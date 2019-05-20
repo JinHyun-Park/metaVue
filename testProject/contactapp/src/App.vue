@@ -142,7 +142,7 @@ export default {
       data.append('photo', file);
       this.$axios.post(CONF.UPDATE_PHOTO.replace("${no}", no), data)
       .then((response) => {
-        if(response.data.status === "successs") {
+        if(response.data.status === "success") {
           this.fetchContacts();
         } else {
           console.log('연락처 사진 변경 실패 : ' + response.data.message);
