@@ -27,49 +27,75 @@
 </style>
 <template>
     <ul id="todolist">
-        <li v-for="a in todolist" :key="a.id" :class="checked(a.done)" @click="doneToggle(a.id)">
+        <li v-for="a in todolist" :key="a.id" :class="checked(a.done)" @click="doneToggle({id: a.id})">
             <span>{{a.todo}}</span>
             <span v-if="a.done">(완료)</span>
-            <span class="close" v-on:click.stop="deleteTodo(a.id)">&#x00D7;</span>
+            <span class="close" v-on:click.stop="deleteTodo({id: a.id})">&#x00D7;</span>
         </li>
     </ul>
 </template>
 
 <script type="text/javascript">
-    import eventBus from '../EventBus'
+    // import eventBus from '../EventBus'
+    import Constant from '../Constant'
+    import {mapState, mapMutations} from 'vuex'
 
     export default {
-        created : function() {
-            eventBus.$on('add-todo', this.addTodo);
-        },
-        data : function() {
-            return {
-                todolist : [
-                    {id:1, todo: "영화보기", done:false},
-                    {id:2, todo: "산책", done:false},
-                    {id:3, todo: "미드", done:false},
-                    {id:4, todo: "운동", done:false},
-                ]
-            }
-        },
+        name : 'List',
+        computed: mapState(['todolist']),
+        // mapState({
+        //     todolist2 : (state) => state.todolist
+        // })       이런식으로 속성명을 다르게 지정도 가능
+        
+        // {
+        //     todolist() {
+        //         return this.$store.state.todolist;
+        //     }
+        // },
+        // vuex를 위해 아래 주석처리
+        // created : function() {
+        //     eventBus.$on('add-todo', this.addTodo);
+        // },
+        // data : function() {
+        //     return {
+        //         todolist : [
+        //             {id:1, todo: "영화보기", done:false},
+        //             {id:2, todo: "산책", done:false},
+        //             {id:3, todo: "미드", done:false},
+        //             {id:4, todo: "운동", done:false},
+        //         ]
+        //     }
+        // },
         methods : {
             checked : function(done) {
                 if(done) return {checked:true};
                 else return {checked:false};
             },
-            addTodo : function(todo) {
-                if(todo !== "") {
-                    this.todolist.push({id:new Date().getTime(), todo: todo, done:false});
-                }
-            },
-            doneToggle : function(id) {
-                var index = this.todolist.findIndex((item)=>item.id === id);
-                this.todolist[index].done = !this.todolist[index].done;
-            },
-            deleteTodo : function(id) {
-                var index = this.todolist.findIndex((item)=>item.id === id);
-                this.todolist.splice(index, 1);
-            }
+            ...mapMutations([
+                Constant.DELETE_TODO,
+                Constant.DONE_TOGGLE
+
+                //메서드 명칭을 변이의 이름과 다르게 사용하고 싶을 경우
+                // removeTodo : Constant.DELETE_TODO,
+                // toggleDone : Constant.DONE_TOGGLE
+                
+            ])
+            // addTodo : function(todo) {
+            //     if(todo !== "") {
+            //         this.todolist.push({id:new Date().getTime(), todo: todo, done:false});
+            //     }
+            // },
+            
+            // doneToggle : function(id) {
+            //     // var index = this.todolist.findIndex((item)=>item.id === id);
+            //     // this.todolist[index].done = !this.todolist[index].done;
+            //     this.$store.commit(Constant.DONE_TOGGLE, {id:id});
+            // },
+            // deleteTodo : function(id) {
+            //     // var index = this.todolist.findIndex((item)=>item.id === id);
+            //     // this.todolist.splice(index, 1);
+            //     this.$store.commit(Constant.DELETE_TODO, {id:id});
+            // }
         }
     }
 

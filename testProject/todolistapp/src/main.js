@@ -1,9 +1,11 @@
 import Vue from 'vue'
 // import App from './App.vue'
 import TodoList from './components/TodoList.vue'
+import store from './store'
 
 Vue.config.productionTip = false
 
 new Vue({
-    render: h => h(TodoList),
+    store,
+    render: h => h(TodoList)
 }).$mount('#app')

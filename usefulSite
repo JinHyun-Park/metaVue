@@ -50,3 +50,6 @@ npm install 다운로드하지 않은 라이브러리 발생 방지
 
 Cross Domain(원래는 SOP-Same Origin Policy)을 해결하기 위해 CORS 대신 컨슈머 서버에서 proxy를 구성할 수 있는데 
 "contactsvc-master" 프로젝트가 그것이고(3000 포트로 실행되며, 해당 프로젝트 내의 readMe 파일로 실행법 확인), 프록시를 수행하려는 쪽에서는 vue.config.js 파일 생성하여 내용 작성하면 됨.("contactapp"참조)
+
+vuex를 이용한 상태 관리 설치
+yarn add vuex 또는 npm install --save vuex
