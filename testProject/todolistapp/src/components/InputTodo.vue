@@ -29,8 +29,9 @@
         },
         methods : {
             addTodo : function() {
-                // eventBus.$emit('add-todo', this.todo);
-                this.$store.commit(Constant.ADD_TODO, {todo: this.todo});
+                // eventBus.$emit('add-todo', this.todo);       //1차 변경전
+                // this.$store.commit(Constant.ADD_TODO, {todo: this.todo});       //2차 변경전
+                this.$store.dispatch(Constant.ADD_TODO, {todo:this.todo});
                 this.todo="";
             }
         }

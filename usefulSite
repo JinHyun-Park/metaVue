@@ -53,3 +53,5 @@ Cross Domain(원래는 SOP-Same Origin Policy)을 해결하기 위해 CORS 대�
 
 vuex를 이용한 상태 관리 설치
 yarn add vuex 또는 npm install --save vuex
+
+VUE CLI로 생성한 프로젝트는 console.log를 금지하고 있음. console.log()를 제한없이 사용하고 싶다면, package.json rules 내에 "no-console" : "off" 설정 추가

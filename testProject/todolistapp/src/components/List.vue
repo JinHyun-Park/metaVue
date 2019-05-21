@@ -38,7 +38,7 @@
 <script type="text/javascript">
     // import eventBus from '../EventBus'
     import Constant from '../Constant'
-    import {mapState, mapMutations} from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         name : 'List',
@@ -71,15 +71,25 @@
                 if(done) return {checked:true};
                 else return {checked:false};
             },
-            ...mapMutations([
-                Constant.DELETE_TODO,
-                Constant.DONE_TOGGLE
+            //비동기 호출 방식
+            deleteTodo : function(payload) {
+                this.$store.dispatch(Constant.DELETE_TODO, payload);
+            },
+            doneToggle : function(payload) {
+                this.$store.dispatch(Constant.DONE_TOGGLE, payload);
+            }
 
-                //메서드 명칭을 변이의 이름과 다르게 사용하고 싶을 경우
-                // removeTodo : Constant.DELETE_TODO,
-                // toggleDone : Constant.DONE_TOGGLE
+            // ...mapMutations([       //동기 호출방식
+            //     Constant.DELETE_TODO,
+            //     Constant.DONE_TOGGLE
+
+            //     //메서드 명칭을 변이의 이름과 다르게 사용하고 싶을 경우
+            //     // removeTodo : Constant.DELETE_TODO,
+            //     // toggleDone : Constant.DONE_TOGGLE
                 
-            ])
+            // ])
+
+
             // addTodo : function(todo) {
             //     if(todo !== "") {
             //         this.todolist.push({id:new Date().getTime(), todo: todo, done:false});
