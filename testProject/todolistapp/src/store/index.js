@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 // import Constant from '../Constant'
 import state from './state.js';
 import mutations from './mutations.js';
-import actions from './actions.js/actions.js';
+import actions from './actions.js';
 
 Vue.use(Vuex);
 

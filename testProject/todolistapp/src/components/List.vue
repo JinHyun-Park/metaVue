@@ -3,7 +3,7 @@
     ul { margin: 0; padding: 0;}
     ul li {
         cursor: pointer; position:relative; padding: 8px 8px 8px 40px;
-        background: #eee; font-size: 14px; transition: 0.2s;
+        background: #eee; font-size: 14px; transition: 0.3s;
         -webkit-user-select: none; -moz-user-select: none;
         -ms-user-select :none; user-select: none;
     }
