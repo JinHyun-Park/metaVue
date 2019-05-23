@@ -39,40 +39,51 @@
 </template>
 
 <script>
-    import eventBus from '../EventBus'
+    // import eventBus from '../EventBus'
+    import Constant from '../Constant';
+    import {mapState} from 'vuex';
     import Paginate from 'vuejs-paginate';
 
     export default {
         name : 'contactList',
         components : {Paginate},
-        props : ['contactlist'],
+        // props : ['contactlist'],
         computed : {
             totalpage : function() {
                 return Math.floor((this.contactlist.totalcount-1)/ this.contactlist.pagesize) + 1;
-            }
+            },
+            ...mapState(['contactlist'])
         },
         watch : {
             ['contactlist.pageno'] : function() {
                 this.$refs.pagebuttons.selected = this.contactlist.pageno;
             }
         },
+        mounted : function() {
+            this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno:1});
+        },
         methods : {
             pageChanged : function(page) {
-                eventBus.$emit("pageChanged", page);
+                // eventBus.$emit("pageChanged", page);
+                this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
             },
             addContact : function() {
-                eventBus.$emit("addContactForm");
+                // eventBus.$emit("addContactForm");
+                this.$store.dispatch(Constant.ADD_CONTACT_FORM);
             },
             editContact : function(no) {
-                eventBus.$emit("editContactForm", no);
+                // eventBus.$emit("editContactForm", no);
+                this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no:no});
             },
             deleteContact : function(no) {
                 if(confirm("정말로 삭제?") == true) {
-                    eventBus.$emit('deleteContact', no);
+                    // eventBus.$emit('deleteContact', no);
+                    this.$store.dispatch(Constant.DELETE_CONTACT, {no:no});
                 }
             },
             editPhoto : function(no) {
-                eventBus.$emit("editPhoto", no);
+                // eventBus.$emit("editPhoto", no);
+                this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
             }
         }
     }

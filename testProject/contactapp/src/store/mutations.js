@@ -13,6 +13,7 @@ export default {
     [Constant.EDIT_CONTACT_FORM]: (state, payload) => {
         state.contact = payload.contact;
         state.mode = "update";
+        state.currentView = "contactForm";
     },
     [Constant.EDIT_PHOTO_FORM]: (state, payload) => {
         state.contact = payload.contact;

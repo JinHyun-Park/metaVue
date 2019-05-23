@@ -66,6 +66,9 @@ export default {
             store.commit(Constant.FETCH_CONTACTS, { contactlist: response.data });
         })
     },
+    [Constant.CANCEL_FORM]: (store) => {
+        store.commit(Constant.CANCEL_FORM);
+    },
     [Constant.DELETE_CONTACT]: (store, payload) => {
         var currentPageNo = store.state.contactlist.pageno;
         axios.delete(CONF.DELETE.replace("${no}", payload.no))
