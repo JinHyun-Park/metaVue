@@ -55,3 +55,6 @@ vuex를 이용한 상태 관리 설치
 yarn add vuex 또는 npm install --save vuex
 
 VUE CLI로 생성한 프로젝트는 console.log를 금지하고 있음. console.log()를 제한없이 사용하고 싶다면, package.json rules 내에 "no-console" : "off" 설정 추가
+
+책에 있는 예제 깃허브 주소
+https://github.com/stepanowon/vuejs_book_2nd/
