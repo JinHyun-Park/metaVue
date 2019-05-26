@@ -43,8 +43,20 @@
         //         }
         //     }
         // },
+        data : function() {
+            return {mode : "add"}
+        },
+        props : ['no'],
         mounted : function() {
             this.$refs.name.focus();
+            var cr = this.$router.currentRoute;
+            if(cr.fullPath.indexOf('/add') > -1) {
+                this.mode = "add";
+                this.$store.dispatch(Constant.INITIALIZE_CONTACT_ONE);
+            } else if(cr.fullPath.indexOf('/update') > -1) {
+                this.mode = "update";
+                this.$store.dispatch(Constant.FETCH_CONTACT_ONE, {no:this.no});
+            }
         },
         computed : {
             btnText : function() {
@@ -55,21 +67,25 @@
                 if(this.mode != 'update') return '새로운 연락처 추가';
                 else return '연락처 변경';
             },
-            ...mapState(['mode', 'contact'])
+            // ...mapState(['mode', 'contact'])
+            ...mapState(['contact', 'contactlist'])
         },
         methods : {
             submitEvent : function() {
                 if(this.mode == "update") {
                     // eventBus.$emit("updateSubmit", this.contact);
                     this.$store.dispatch(Constant.UPDATE_CONTACT);
+                    this.$router.push({name:'contacts', query:{page:this.contactlist.pageno}});
                 } else {
                     // eventBus.$emit("addSubmit", this.contact);
                     this.$store.dispatch(Constant.ADD_CONTACT);
+                    this.$router.push({name:'contacts', query: {page:1}});
                 }
             },
             cancelEvent : function() {
                 // eventBus.$emit("cancel");
-                this.$store.dispatch(Constant.CANCEL_FORM);
+                // this.$store.dispatch(Constant.CANCEL_FORM);
+                this.$router.push({name: 'contacts', query:{page:this.contactlist.pageno}});
             }
         }
     }

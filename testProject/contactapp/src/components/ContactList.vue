@@ -1,8 +1,10 @@
 <template>
     <div>
         <p class="addnew">
-            <button class="btn btn-primary" @click="addContact()">
-                새로운 연락처 추가하기</button>
+            <!-- <button class="btn btn-primary" @click="addContact()"> -->
+            <router-link class="btn btn-primary" v-bind:to="{name: 'addcontact'}">
+                새로운 연락처 추가하기</router-link>
+            <!-- </button> -->
         </p>
         <div id="example">
             <table id="list" class="table table-striped table-bordered table-hover">
@@ -35,6 +37,12 @@
             :container-class = "'pagination'"
             :page-class = "'page-item'">
         </paginate>
+        <transition 
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:leave="leave">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -43,6 +51,7 @@
     import Constant from '../Constant';
     import {mapState} from 'vuex';
     import Paginate from 'vuejs-paginate';
+    import Velocity from 'velocity-animate';
 
     export default {
         name : 'contactList',
@@ -54,36 +63,69 @@
             },
             ...mapState(['contactlist'])
         },
+        mounted : function() {
+            var page = 1;
+            if(this.$route.query && this.$route.query.page) {
+                page = parseInt(this.$route.query.page);
+            }
+            this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+            this.$refs.pagebuttons.selected = page-1;
+        },
         watch : {
-            ['contactlist.pageno'] : function() {
-                this.$refs.pagebuttons.selected = this.contactlist.pageno;
+            // ['contactlist.pageno'] : function() {
+            //     this.$refs.pagebuttons.selected = this.contactlist.pageno;
+            // }
+            '$route' : function(to/*, from*/) {
+                if(to.query.page && to.query.page != this.contactlist.pageno) {
+                    var page = to.query.page;
+                    this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+                    this.$refs.pagebuttons.selected = page-1;
+                }
             }
         },
-        mounted : function() {
-            this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno:1});
-        },
+        // mounted : function() {
+        //     this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno:1});
+        // },
         methods : {
             pageChanged : function(page) {
                 // eventBus.$emit("pageChanged", page);
-                this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+                // this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+                this.$router.push({name: 'contacts', query: {page: page}})
             },
-            addContact : function() {
-                // eventBus.$emit("addContactForm");
-                this.$store.dispatch(Constant.ADD_CONTACT_FORM);
-            },
+            // addContact : function() {
+            //     // eventBus.$emit("addContactForm");
+            //     this.$store.dispatch(Constant.ADD_CONTACT_FORM);
+            // },
             editContact : function(no) {
                 // eventBus.$emit("editContactForm", no);
-                this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no:no});
+                // this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no:no});
+                this.$router.push({name: 'updatecontact', params: {no:no}})
             },
             deleteContact : function(no) {
                 if(confirm("정말로 삭제?") == true) {
                     // eventBus.$emit('deleteContact', no);
                     this.$store.dispatch(Constant.DELETE_CONTACT, {no:no});
+                    this.$router.push({name: 'contacts'})
                 }
             },
             editPhoto : function(no) {
                 // eventBus.$emit("editPhoto", no);
-                this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
+                // this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
+                this.$router.push({name: 'updatephoto', params: {no:no}})
+            }
+            ,beforeEnter : function(el) {
+                el.style.opacity = 0
+            },
+            enter : function(el, done) {
+                Velocity (el, {opacity:0, scale:0.2}, {duration:100})
+                Velocity (el, {opacity:0.7, scale:1.2}, {duration:200})
+                Velocity (el, {opacity:1, scale:1}, {complete:done})
+            },
+            leave : function(el, done) {
+                Velocity(el, {translateX: '0px', opacity:1}, {duration:100})
+                Velocity(el, {translateX: '20px', opacity:1}, {duration:100, loop:2})
+                Velocity(el, {translateX: '0px', opacity:1}, {duration:100})
+                Velocity(el, {translateX: '100px', opacity:0}, {complete: done})
             }
         }
     }

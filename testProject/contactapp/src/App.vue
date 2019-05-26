@@ -1,32 +1,48 @@
-<template>
+  <template>
   <div id="container">
     <div class="page-header">
       <h1 class="text-center">연락처 관리 어플리케이션</h1>
-      <p>(Dynamic Component + EventBus + Axios)</p>
+      <!-- <p>(Dynamic Component + EventBus + Axios)</p> -->
+      <p>(Vue-router + Vuex + Axios)</p>
+      <div class="btn-gorup">
+        <router-link to="/home" class="btn btn-info menu">Home</router-link>
+        <router-link to="/about" class="btn btn-info menu">About</router-link>
+        <router-link to="/contacts" class="btn btn-info menu">Contacts</router-link>
+      </div>
     </div>
-    <component :is="currentView"></component>
-    <contact-list></contact-list>
+    <transition name="flip" mode="out-in">
+      <router-view></router-view>
+    </transition>
+    <loading v-show="isloading"></loading>
+    <!-- <component :is="currentView"></component>
+    <contact-list></contact-list> //12장에서 주석 -->
   </div>
 </template>
 
 <script>
-import ContactList from './components/ContactList';
+  import Loading from './components/Loading'
+  import {mapState} from 'vuex'
+// import ContactList from './components/ContactList';    //12장에서 주석
 // import AddContact from './components/AddContact';
 // import UpdateContact from './components/UpdateContact';
-import UpdatePhoto from './components/UpdatePhoto';
-import ContactForm from './components/ContactForm';
+// import UpdatePhoto from './components/UpdatePhoto';    //12장에서 주석
+// import ContactForm from './components/ContactForm';    //12장에서 주석
 
 // import CONF from './Config.js';
 // import eventBus from './EventBus.js';
 
-import {mapState} from 'vuex';
+// import {mapState} from 'vuex';   //12장에서 주석
 
 export default {
   name: 'app',
-  components: {
-    ContactList, ContactForm, UpdatePhoto //,  AddContact, UpdateContact 
-  },
-  computed : mapState(['currentView'])
+  components : {Loading},
+  computed : mapState(['isloading'])
+ 
+  //12장에서 주석
+  // components: {
+  //   ContactList, ContactForm, UpdatePhoto //,  AddContact, UpdateContact 
+  // },
+  // computed : mapState(['currentView'])
 
   // data : function() {
   //   return {
@@ -163,12 +179,22 @@ export default {
 </script>
 
 <style>
-#container {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #container {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  .flip-enter-active {
+    transition : all .4s ease-in-out;
+  }
+  .flip-leave-active {
+    transition : all .4s ease-in-out;
+  }
+  .flip-enter, .flip-leave-to {
+    transform: scaleY(0) translateZ(0);
+    opacity: 0;
+  }
 </style>

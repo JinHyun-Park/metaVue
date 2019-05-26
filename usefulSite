@@ -58,3 +58,10 @@ VUE CLI로 생성한 프로젝트는 console.log를 금지하고 있음. console
 
 책에 있는 예제 깃허브 주소
 https://github.com/stepanowon/vuejs_book_2nd/
+
+지연 발생 처리 API 추가
+yarn add vue-simple-spinner 또는 npm install --save vue-simple-spinner
+
+애니메이션 패키지 추가
+yarn add velocity-animate@1.5.1 또는 npm install --save velocity-animate@1.5.1
+추가는 import Velocity from 'velocity-animate'

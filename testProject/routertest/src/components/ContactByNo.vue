@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>연락처 상세</h1>
+        <hr class="divider"/>
         <div>
             <table class="detail table table-bordered">
                 <tbody>
@@ -31,15 +31,30 @@
 
     export default {
         name : 'contactbyno',
+        props : ['no'],
         data : function() {
             return {
-                no : 0,
+                // no : 0,
                 contacts : contactlist.contacts
             }
         },
-        created : function() {
-            this.no = this.$route.params.no;
-        },
+        //prop 추가되면서 제거 App.vue에서 props 속성 추가 후
+        // created : function() {
+        //     this.no = this.$route.params.no;
+        // },
+        // watch : {
+        //     '$route' : function(to /*, from*/) {
+        //         this.no = to.params.no;
+        //     }
+        // },
+
+        //prop 추가되면서 제거 App.vue에서 props 속성 추가 후
+        // beforeRouteUpdate(to, from, next) {
+        //     /* eslint-disable */
+        //     console.log("**beforeRouterUpdate");
+        //     this.no = to.params.no;
+        //     next()
+        // },
         computed : {
             contact : function() {
                 /* eslint-disable */
@@ -57,4 +72,6 @@
 
 <style>
     table.detail {width:400px;}
+    .divider { height: 3px; margin-left: auto; margin-right: auto;
+        background-color: #FF0066; color:#FF0066; border: 0 none;}
 </style>

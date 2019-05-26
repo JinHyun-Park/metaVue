@@ -4,9 +4,15 @@
       <h1 class="headerText">(주)openSG</h1>
       <nav>
         <ul>
-          <li><router-link to="/home">Home</router-link></li>
-          <li><router-link to="/about">About</router-link></li>
-          <li><router-link to="/contacts">Contacts</router-link></li>
+          <li>
+            <router-link v-bind:to="{name:'home'}">Home</router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="{name:'about'}">About</router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="{name: 'contacts'}">Contacts</router-link>
+          </li>
         </ul>
       </nav>
     </div>
@@ -22,16 +28,45 @@ import Home from './components/Home.vue'
 import About from './components/About.vue'
 import Contacts from './components/Contacts.vue'
 import ContactByNo from './components/ContactByNo.vue'
+import NotFound from './components/NotFound.vue'
 import VueRouter from 'vue-router';
 
 const router = new VueRouter({
+  mode : 'history',
   routes : [
     {path:'/', component: Home},
-    {path:'/home', component: Home},
-    {path:'/about', component: About},
-    {path:'/contacts', component: Contacts},
-    {path:'/contacts/:no', component: ContactByNo}
+    {path:'/home', name:'home', component: Home},
+    {path:'/about', name: 'about', component: About},
+    {
+      path:'/contacts', name:'contacts', component: Contacts,
+      children : [
+        // {path: ':no', name:'contactbyno', component : ContactByNo},
+        {
+          path: ':no', name:'contactbyno', component: ContactByNo, props:true
+          // path: ':no', name:'contactbyno', component: ContactByNo,
+          // beforeEnter : (to, from, next) => {
+          //   /* eslint-disable */ 
+          //   console.log("@@ beforeEnter! : " + from.path + "--> " + to.path);
+          //   if(from.path.startsWith('/contacts'))
+          //     next();
+          //   else
+          //     next('home');
+          // }
+        }
+      ]
+    },
+    {path: '*', component: NotFound}
+    // {path:'/contacts/:no', component: ContactByNo}
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  /* eslint-disable */ 
+  console.log("**beforeEach");
+  next();
+})
+router.afterEach((to, from)=> {
+  console.log("afterEach");
 })
 
 export default {

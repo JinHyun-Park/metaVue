@@ -24,15 +24,24 @@
     .close:hover {
         background-color: #f44336; color: white;
     }
+    .list-enter-active, .list-leave-active {
+        transition : all 0.5s;
+    }
+    .list-enter, .list-leave-to {
+        opacity: 0;
+        transform: translateY(50px);
+    }
 </style>
 <template>
-    <ul id="todolist">
+    <!-- <ul id="todolist"> -->
+    <transition-group name="list" tag="ul">
         <li v-for="a in todolist" :key="a.id" :class="checked(a.done)" @click="doneToggle({id: a.id})">
             <span>{{a.todo}}</span>
             <span v-if="a.done">(완료)</span>
             <span class="close" v-on:click.stop="deleteTodo({id: a.id})">&#x00D7;</span>
         </li>
-    </ul>
+    </transition-group>
+    <!-- </ul> -->
 </template>
 
 <script type="text/javascript">
