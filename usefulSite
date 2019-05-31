@@ -21,6 +21,7 @@ VS code 확장 설치목록
 5. Vue 2 Snippets : Vue.js 2.0 의 코드 조각 지원과 문법 강조 기능 제공
 6. Vue-beautify : Vue.js 코드에 대한 정리, 배치 기능 제공
 7. ESLint : 자바스크립트 코드 스타일, 문법 체크 기능을 제공
+8. vscode-icons : vscode 디렉터리 구조 예쁘게 변경
 
 크롬 브라우저 Vue JS devtools 설치
 크롬 웹스토어 검색 > Vue.js 검색 > Vue.js devtools 설치
@@ -65,3 +66,6 @@ yarn add vue-simple-spinner 또는 npm install --save vue-simple-spinner
 애니메이션 패키지 추가
 yarn add velocity-animate@1.5.1 또는 npm install --save velocity-animate@1.5.1
 추가는 import Velocity from 'velocity-animate'
+
+vue 적절한 구조
+https://medium.com/tldr-tech/vue-js-2-vuex-router-yarn-basic-configuration-version-2-7b9c489d43b3
