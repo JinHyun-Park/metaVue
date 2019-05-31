@@ -37,6 +37,7 @@ vue init webpack my-project   : my-project 라는 폴더 구조 생성
 npm install -g liver-server
 Babel 관련 라이브러리 설치
 npm install -g babel-cli yarn
+yarn add -D babel-cli babel-preset-env babel-preset-stage-2
 
 ajax 용 라이브러리인 axios 다운
 yarn add axios 또는 npm install --save axios
